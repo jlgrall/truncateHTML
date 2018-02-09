@@ -197,7 +197,7 @@ function truncateHTML($maxLength, $html, array $options = []) {
 				
 				if (!$keepCurrentPos && $options['cutWord'] > 0 && $pos > $textStartPos) {
 					// Here we will find the length of current word and compare it to $options['cutWord'].
-					$re_wordStart = "/\G.{0,$maxPos}\K(?<=$wholeWordSep)(?!$wholeWordSep)./s".$utf8_mod;
+					$re_wordStart = "/\G.{0,$maxPos}\K(?<=$wholeWordSep)(?!$wholeWordSep)./s";		// No $utf8_mod, because $maxPos is in bytes.
 					$found = preg_match($re_wordStart, $html, $wordStartMatches, PREG_OFFSET_CAPTURE, $minPos);
 					if ($found && $wordStartMatches[0][1] > $minPos) {
 						$wordStart = $wordStartMatches[0][1];
@@ -216,10 +216,11 @@ function truncateHTML($maxLength, $html, array $options = []) {
 				}
 				if (!$keepCurrentPos) {
 					// Here we will find the end of the previous word.
-					$re_wholeWord = "/\G.{0,$maxPos}\K(?<!$wholeWordSep)(?=$wholeWordSep)./s".$utf8_mod;
+					$re_wholeWord = "/\G.{0,$maxPos}\K(?<!$wholeWordSep)(?=$wholeWordSep)./s";		// No $utf8_mod, because $maxPos is in bytes.
 					$found = preg_match($re_wholeWord, $html, $wholeWordMatches, PREG_OFFSET_CAPTURE, $minPos);
 					if ($found && $wholeWordMatches[0][1] > 0) {
 						$newPos = $wholeWordMatches[0][1];
+						assert($newPos <= $pos, "\$newPos can only be moved backward from $\pos (\$newPos=$newPos, \$pos=$pos)");
 						if ($newPos !== $pos) {
 							$endData['ellipsisPos'] = $newPos;
 							$endData['truncatePos'] = $newPos;

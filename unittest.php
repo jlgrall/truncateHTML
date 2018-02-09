@@ -416,7 +416,23 @@ sub([
 			t(10, "1<b>&amp; &plus;</b><!-- -->567890");
 		});
 	});
-
+	
+	
+	
+	/* NOW CHECK FOR PREVIOUS FIXED ERRORS AND BUGS */
+	
+	// TEST fix: multibyte character bug in regexes in $finalizeEllipsisData():
+	sub([
+		'includeEllipsisLength' => true,
+		'wholeWord' => true,
+	], function() {
+		input("<p><span>éa a</span></p>");
+		t( 0, "…");
+		t( 1, "…");
+		t( 2, "…");
+		t( 3, "<p><span>éa…</span></p>");
+		t( 4, "<p><span>éa a</span></p>");
+	});
 });
 
 
