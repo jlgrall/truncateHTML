@@ -98,6 +98,9 @@ _If you find more, please open an [issue](https://github.com/jlgrall/truncateHTM
 
 ## History (changelog)
 
+- __v1.0.1__ _(9 Feb. 2018)_:
+  - Fix multibyte characters in regex
+  - Add parameter types verifications
 - __v1.0__ _(5 Feb. 2018)_:
   - Initial version
   - _Inspired by:_

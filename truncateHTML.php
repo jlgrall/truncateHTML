@@ -2,7 +2,7 @@
 /**
  * Function that truncates (shortens) a given HTML5 string to a max number of characters.
  * 
- * @version 1.0
+ * @version 1.0.1
  * @license MIT
  * @see https://github.com/jlgrall/truncateHTML Project page for truncateHTML
  * 
