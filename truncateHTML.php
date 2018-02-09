@@ -368,7 +368,7 @@ function truncateHTML($maxLength, $html, array $options = []) {
 					}
 					else {	// Un-paired closing tag (Malformed HTML ? Mismatched or badly nested tag ?)
 						if ($prevTag !== null) $openedTags[] = $prevTag;
-						if ($options['debug'] === true) throw new \Exception("Unmatched closing tag (at position $pos):".$tagMatches[1][0]);
+						if ($options['debug'] === true) throw new \Exception("Unmatched closing tag '$tag' (\$tagPos=$tagPos, \$pos=$pos, \$length=$length)");
 						else {
 							// We backtrack:
 							if ($endData_lastCountedChar['ellipsisPos'] !== -2) {
