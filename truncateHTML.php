@@ -19,6 +19,9 @@
  * @return string $truncated_html
  */
 function truncateHTML($maxLength, $html, array $options = []) {
+	assert(is_int($maxLength), "Parameter \$maxLength must be an int");
+	assert(is_string($html), "Parameter \$html must be a string");
+	
 	$_isUtf8 = !isset($options['utf8']) || $options['utf8'] === true;
 	$default = [
 		// If utf8, ellipsis defaults to HORIZONTAL ELLIPSIS ('…' ie. '...' as a single unicode character):
@@ -33,6 +36,8 @@ function truncateHTML($maxLength, $html, array $options = []) {
 		'debug' => false,
 	];
 	$options += $default;
+	
+	assert(is_int($options['cutWord']) || $options['cutWord'] === false, "Option \$options['cutWord'] must be an integer or FALSE");
 	
 	// THE function that does all the work of finding the position for the ellipsis,
 	// the position for the truncation, and keeping track of opened tags:
